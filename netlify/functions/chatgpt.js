@@ -1,8 +1,8 @@
-const fetch = require('node-fetch');
-
 exports.handler = async function(event) {
   const { message } = JSON.parse(event.body);
   const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
+
+  const fetch = (await import('node-fetch')).default;
 
   const response = await fetch("https://api.openai.com/v1/chat/completions", {
     method: "POST",
