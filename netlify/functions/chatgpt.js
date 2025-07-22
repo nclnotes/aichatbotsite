@@ -1,7 +1,6 @@
 exports.handler = async function (event) {
   try {
     const { message } = JSON.parse(event.body);
-    const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
 
     const fetch = (await import('node-fetch')).default;
 
@@ -9,7 +8,7 @@ exports.handler = async function (event) {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `Bearer ${OPENAI_API_KEY}`
+        "Authorization": `Bearer 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`
       },
       body: JSON.stringify({
         model: "gpt-3.5-turbo",
@@ -24,6 +23,7 @@ exports.handler = async function (event) {
     });
 
     const data = await response.json();
+    console.log("OpenAI raw response:", JSON.stringify(data, null, 2));
 
     const reply = data.choices?.[0]?.message?.content || "No reply from OpenAI.";
 
